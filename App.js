@@ -16,8 +16,9 @@ import {Text} from 'react-native';
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'; */
-import Home from './src/screens/container/home';
-import Header from './src/sections/components/header';
+import Home from './src/screens/container/Home';
+import Header from './src/sections/components/Header';
+import SuggestionList from './src/videos/container/SuggestionList';
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
       </Header>
       <Text>buscador</Text>
       <Text>categorías</Text>
-      <Text>sugerencias</Text>
+      <SuggestionList />
     </Home>
   );
 };
