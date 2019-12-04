@@ -19,14 +19,18 @@ import { Text } from 'react-native';
 import Home from './src/screens/container/Home';
 import Header from './src/sections/components/Header';
 import SuggestionList from './src/videos/container/SuggestionList';
+import CategoryList from './src/videos/container/CategoryList';
 import API from './utils/api';
 
 const App = () => {
   const [listMovies, setListMovies] = useState([]);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     (async function getMovies() {
       const movies = await API.getSuggestion(10);
+      const categoryMovies = await API.getListMovies();
       setListMovies(movies);
+      setCategories(categoryMovies);
     })();
   }, []);
   return (
@@ -36,6 +40,7 @@ const App = () => {
       </Header>
       <Text>buscador</Text>
       <Text>categorías</Text>
+      <CategoryList list={categories} />
       <SuggestionList list={listMovies} />
     </Home>
   );
