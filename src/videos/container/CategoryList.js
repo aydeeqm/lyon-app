@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import Layout from '../components/CategoryListLayout';
 import Empty from '../components/Empty';
-import Sepatator from '../components/VerticalSeparator';
-import Suggestion from '../components/Suggestion';
+import Sepatator from '../../sections/components/HorizontalSeparator';
+import Category from '../components/Category';
 
 class CategoryList extends Component {
   keyExtractor = item => item.id.toString();
   renderEmpty = () => <Empty text="No hay sugerencias" />;
   renderSeparator = () => <Sepatator />;
-  renderItem = ({ item }) => <Suggestion {...item} />;
+  renderItem = ({ item }) => <Category {...item} />;
   render() {
     return (
       <Layout title="Categorias">
