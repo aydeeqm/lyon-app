@@ -20,6 +20,7 @@ import Home from './src/screens/container/Home';
 import Header from './src/sections/components/Header';
 import SuggestionList from './src/videos/container/SuggestionList';
 import CategoryList from './src/videos/container/CategoryList';
+import Player from './src/player/container/Player';
 import API from './utils/api';
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
       <Header>
         <Text>User</Text>
       </Header>
+      <Player />
       <Text>buscador</Text>
       <Text>categorías</Text>
       <CategoryList list={categories} />
