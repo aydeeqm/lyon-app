@@ -6,8 +6,9 @@
  * @flow
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'react-native';
+import { Provider } from 'react-redux';
 
 /* import {
   Header,
@@ -22,29 +23,41 @@ import SuggestionList from './src/videos/container/SuggestionList';
 import CategoryList from './src/videos/container/CategoryList';
 import Player from './src/player/container/Player';
 import API from './utils/api';
+import store from './redux/store';
 
 const App = () => {
-  const [listMovies, setListMovies] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // const [listMovies, setListMovies] = useState([]);
+  // const [categories, setCategories] = useState([]);
   useEffect(() => {
     (async function getMovies() {
-      const movies = await API.getSuggestion(10);
-      const categoryMovies = await API.getListMovies();
-      setListMovies(movies);
-      setCategories(categoryMovies);
+      const categoryList = await API.getListMovies();
+      store.dispatch({
+        type: 'SET_CATEGORY_LIST',
+        payload: {
+          categoryList,
+        },
+      });
+      const suggestionList = await API.getSuggestion(10);
+      store.dispatch({
+        type: 'SET_SUGGESTION_LIST',
+        payload: {
+          suggestionList,
+        },
+      });
     })();
   }, []);
   return (
-    <Home>
-      <Header>
-        <Text>User</Text>
-      </Header>
-      <Player />
-      <Text>buscador</Text>
-      <Text>categorías</Text>
-      <CategoryList list={categories} />
-      <SuggestionList list={listMovies} />
-    </Home>
+    <Provider store={store}>
+      <Home>
+        <Header>
+          <Text>User</Text>
+        </Header>
+        <Player />
+        <Text>buscador lll</Text>
+        <CategoryList />
+        <SuggestionList />
+      </Home>
+    </Provider>
   );
 };
 

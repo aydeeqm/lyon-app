@@ -4,6 +4,7 @@ import Layout from '../components/SuggestionListLayout';
 import Empty from '../components/Empty';
 import Sepatator from '../components/VerticalSeparator';
 import Suggestion from '../components/Suggestion';
+import { connect } from 'react-redux';
 
 class SuggestionList extends Component {
   keyExtractor = item => item.id.toString();
@@ -25,4 +26,10 @@ class SuggestionList extends Component {
   }
 }
 
-export default SuggestionList;
+function mapStateToProps(state) {
+  return {
+    list: state.suggestionList,
+  };
+}
+
+export default connect(mapStateToProps)(SuggestionList);

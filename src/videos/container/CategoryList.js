@@ -4,6 +4,7 @@ import Layout from '../components/CategoryListLayout';
 import Empty from '../components/Empty';
 import Sepatator from '../../sections/components/HorizontalSeparator';
 import Category from '../components/Category';
+import { connect } from 'react-redux';
 
 class CategoryList extends Component {
   keyExtractor = item => item.id.toString();
@@ -26,4 +27,10 @@ class CategoryList extends Component {
   }
 }
 
-export default CategoryList;
+function mapStateToProps(state) {
+  return {
+    list: state.categoryList,
+  };
+}
+
+export default connect(mapStateToProps)(CategoryList);
