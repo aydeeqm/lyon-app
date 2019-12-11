@@ -15,9 +15,8 @@ class Player extends Component {
     progress: 0.0,
     currentTime: 0.0,
     duration: 0,
+    fullScreen: false,
   };
-
-  videoRef = element => (this.video = element);
 
   onBuffer = ({ isBuffering }) => {
     this.setState({ loading: isBuffering });
@@ -43,8 +42,13 @@ class Player extends Component {
     });
   };
 
+  onFullScreen = () => {
+    this.setState(prevState => ({ fullScreen: !prevState.fullScreen }));
+    this.video.presentFullscreenPlayer();
+  };
+
   render() {
-    const { currentTime, duration } = this.state;
+    const { currentTime, duration, fullScreen } = this.state;
     return (
       <Layout
         loading={this.state.loading}
@@ -58,8 +62,11 @@ class Player extends Component {
             onBuffer={this.onBuffer}
             onLoad={this.onLoad}
             paused={this.state.paused}
-            ref={this.videoRef}
+            ref={ref => {
+              this.video = ref;
+            }}
             onProgress={this.onProgress}
+            fullscreen={fullScreen}
           />
         }
         loader={<ActivityIndicator color="grey" />}
@@ -68,7 +75,7 @@ class Player extends Component {
             <PlayPause onPress={this.onPlayPause} paused={this.state.paused} />
             <ProgressBar progress={this.state.progress} />
             <TimeLeft current={currentTime} total={duration} />
-            <FullSCreen />
+            <FullSCreen onPress={this.onFullScreen} />
           </ControlLayout>
         }
       />

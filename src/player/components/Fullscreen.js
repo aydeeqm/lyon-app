@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Fullscreen = () => {
+const Fullscreen = ({ onPress }) => {
   return (
-    <Text>
-      <Icon name="fullscreen" size={25} color="#900" />
-    </Text>
+    <TouchableHighlight onPress={onPress}>
+      <Text>
+        <Icon name="fullscreen" size={25} color="#900" />
+      </Text>
+    </TouchableHighlight>
   );
 };
 
